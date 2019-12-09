@@ -14,5 +14,5 @@ jobs:
           background: true
       - run:
           name: Check CyREST
-          command: sleep 300 && pgrep -a cytoscape
+          command: sleep 120 && curl -X GET 'http://localhost:1234/v1/version'
           
