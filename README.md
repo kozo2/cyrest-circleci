@@ -1,1 +1,1 @@
-# cytoscape-circleci
+# cyrest-circleci
