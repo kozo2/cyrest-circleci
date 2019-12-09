@@ -1,11 +1,19 @@
 version: 2
 jobs:
-  build:
+  one:
     docker:
       - image: ubuntu
     steps:
-      - checkout
-      - run: apt-get update && apt-get install openjdk-8-jdk wget curl xvfb -y && wget https://github.com/cytoscape/cytoscape/releases/download/3.7.2/cytoscape-3.7.2.tar.gz && tar xf cytoscape-3.7.2.tar.gz && rm cytoscape-3.7.2.tar.gz
-      - run: xvfb-run bash ./cytoscape-unix-3.7.2/cytoscape.sh
-      - run: pgrep -a cytoscape
-      
+      - apt-get update && apt-get install openjdk-8-jdk wget curl xvfb -y && wget https://github.com/cytoscape/cytoscape/releases/download/3.7.2/cytoscape-3.7.2.tar.gz && tar xf cytoscape-3.7.2.tar.gz && rm cytoscape-3.7.2.tar.gz && xvfb-run bash ./cytoscape-unix-3.7.2/cytoscape.sh
+  two:
+    docker:
+      - image: ubuntu
+    steps:
+      - sleep(300) && pgrep -a cytoscape
+
+workflows:
+  version: 2
+    build:
+      jobs:
+        - one
+        - two
